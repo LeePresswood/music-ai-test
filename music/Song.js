@@ -8,12 +8,20 @@ module.exports = class Song {
      * @param {object} data MIDI data for the entire song.
      */
     constructor(data) {
-        this.timeSignatureNumerator = 0;
-        this.timeSignatureDenominator = 0;
+        this.metadata = new Metadata(4, 4);
         this.windows = [];
     }
 };
 
-class Window {
+class Metadata {
+    constructor(timeSignatureNumerator, timeSignatureDenominator) {
+        this.timeSignatureNumerator = timeSignatureNumerator;
+        this.timeSignatureDenominator = timeSignatureDenominator;
+    }
+}
 
+class Window {
+    constructor() {
+
+    }
 }
