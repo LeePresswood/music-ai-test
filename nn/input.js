@@ -5,6 +5,16 @@
  * Use -1 for null, undefined, unknown, or don't care.
  *
  */
-module.exports = [
+class Input {
 
-];
+}
+
+/**
+ *
+ * @param {Window[]} windows
+ * @returns InputOutput training data array for the Neural Network.
+ *          Use this
+ */
+exports.getInputs = async function (windows) {
+
+};
