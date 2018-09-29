@@ -1,0 +1,20 @@
+{
+  "name": "music-ai-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeePresswood/music-ai-test.git"
+  },
+  "keywords": [],
+  "author": "Lee Presswood <LeePresswood@gmail.com> (https://twitter.com/Lee_Presswood)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeePresswood/music-ai-test/issues"
+  },
+  "homepage": "https://github.com/LeePresswood/music-ai-test#readme"
+}
