@@ -64,8 +64,21 @@ class Track {
                 ...
             ]
         */
-        console.log(notes);
-        this.windows = [];
+        console.log(notes[notes.length - 1]);
+
+        //We need to find a way to look at notes in relation to the notes immediately before and after the current note.
+        //My idea here is to use a sliding window of the 5 notes before and after the current note.
+        //This window will be inclusive of blank values (such as the very beginning or ending of a song).
+        //That is to say that we'll have the same number of windows as we have notes.
+        this.windows = notes
+            .map((current, index) => rangeAround(index, 5))
+            .map((range) => range.map((i) => notes[i]))
+            .map((window) => ({
+                note: window.midi,
+                duration: window.duration
+            }));
+
+        //Something to think about -- what do we do with timing / rests?
     }
 }
 
@@ -77,4 +90,13 @@ class Window {
 
 function normalizeBy(val, denom) {
     return Math.min(val, denom) / denom;
+}
+
+function rangeAround(index, radius) {
+    let range = [];
+    for (let i = index - radius; i <= index + radius; i++) {
+        range.push(i);
+    }
+
+    return range;
 }
