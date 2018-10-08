@@ -1,3 +1,6 @@
+exports.INPUT_SIZE = 10;
+exports.OUTPUT_SIZE = 10;
+
 /**
  *
  * @param {Song} song Song metadata + notes

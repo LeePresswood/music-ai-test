@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/LeePresswood/music-ai-test/issues"
   },
-  "homepage": "https://github.com/LeePresswood/music-ai-test#readme"
+  "homepage": "https://github.com/LeePresswood/music-ai-test#readme",
+  "dependencies": {
+    "midiconvert": "^0.4.7",
+    "synaptic": "^1.1.4"
+  }
 }
