@@ -66,22 +66,27 @@ class Track {
                 ...
             ]
         */
-        console.log(notes[notes.length - 1]);
-
         //We need to find a way to look at notes in relation to the notes immediately before and after the current note.
         //My idea here is to use a sliding window of the 5 notes before and after the current note.
         //This window will be inclusive of blank values (such as the very beginning or ending of a song).
         //That is to say that we'll have the same number of windows as we have notes.
-        this.windows = notes
-            .map(this.normalizeNote)
-            .map((current, index) => rangeAround(index, 5))
-            .map((range) => range.map((i) => notes[i]))
-            .map((window) => ({
-                note: window.midi,
-                duration: window.duration
-            }));
+        const lookbackIndices = notes
+            .map((current, index) => rangeBehind(index, 5));
 
-        //Something to think about -- what do we do with timing / rests?
+        const normalizedNotes = notes
+            .map(this.normalizeNote);
+
+        //We end up with an array of normalized note arrays. Each array represents the previous 5 notes behind the next note.
+        const windows = lookbackIndices
+            .map((range) => range.map((i) => normalizedNotes[i]));
+
+        //We want the final result to be an array of training sets. We want the lookback data of the previous 5 notes
+        //and the resulting note that we expect the NN to return.
+        this.trainingSets = normalizedNotes
+            .map((current, index) => ({
+                lookback: windows[index],
+                result: current
+            }));
     }
 
     normalizeNote(note) {
@@ -104,19 +109,13 @@ class Track {
     }
 }
 
-class Window {
-    constructor() {
-
-    }
-}
-
 function normalizeBy(val, denom) {
     return Math.min(val, denom) / denom;
 }
 
-function rangeAround(index, radius) {
+function rangeBehind(index, lookback) {
     let range = [];
-    for (let i = index - radius; i <= index + radius; i++) {
+    for (let i = index - lookback; i < index; i++) {
         range.push(i);
     }
 
