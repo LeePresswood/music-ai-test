@@ -1,3 +1,5 @@
+const length = 6 * 60 + 32;
+
 module.exports = class Song {
     /**
      * List of inputs spread across an array.
@@ -71,6 +73,7 @@ class Track {
         //This window will be inclusive of blank values (such as the very beginning or ending of a song).
         //That is to say that we'll have the same number of windows as we have notes.
         this.windows = notes
+            .map(this.normalizeNote)
             .map((current, index) => rangeAround(index, 5))
             .map((range) => range.map((i) => notes[i]))
             .map((window) => ({
@@ -79,6 +82,25 @@ class Track {
             }));
 
         //Something to think about -- what do we do with timing / rests?
+    }
+
+    normalizeNote(note) {
+        let normalizedNote = {};
+
+        //midi -- The note. Normalize by 128.
+        normalizedNote['midi'] = normalizeBy(note.midi, 128);
+
+        //time -- The point in the song at which the note is played. Normalize by the length of the song.
+        normalizedNote['time'] = normalizeBy(note.time, length);
+
+        //duration -- How long the note is held. Normalize by 100.
+        normalizedNote['duration'] = normalizeBy(note.duration, 100);
+
+        //velocity -- The forcefulness or loudness of the note. Normalize by 128.
+        normalizedNote['velocity'] = normalizeBy(note.velocity, 128);
+
+
+        return normalizedNote;
     }
 }
 
