@@ -85,7 +85,12 @@ class Track {
         //and the resulting note that we expect the NN to return.
         this.trainingSets = normalizedNotes
             .map((current, index) => ({
-                lookback: windows[index],
+                lookback: windows[index] || {
+                    midi: -1,
+                    time: -1,
+                    duration: -1,
+                    velocity: -1
+                },
                 result: current
             }));
     }

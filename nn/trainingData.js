@@ -1,5 +1,5 @@
 exports.INPUT_SIZE = 10;
-exports.OUTPUT_SIZE = 10;
+exports.OUTPUT_SIZE = 4;
 
 /**
  *
