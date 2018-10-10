@@ -1,3 +1,4 @@
+//TODO: Get the length of the song.
 const length = 6 * 60 + 32;
 
 module.exports = class Song {
@@ -71,7 +72,7 @@ class Track {
         //This window will be inclusive of blank values (such as the very beginning or ending of a song).
         //That is to say that we'll have the same number of windows as we have notes.
         const lookbackIndices = notes
-            .map((current, index) => rangeBehind(index, 5));
+            .map((current, index) => rangeBehind(index, 5)); //TODO: Find the optimal lookback.
 
         const normalizedNotes = notes
             .map(this.normalizeNote);
